@@ -3,9 +3,6 @@ const {
 } = require("kafkajs");
 //const Kafka = require("kafkajs")();
 
-
-
-
 const topic_name = process.argv[2] || "Logs2";
 
 let partion = process.argv[3] || 0
@@ -25,17 +22,18 @@ async function createProducer() {
         await producer.connect();
         console.log("Producer'a bağlantı başarılı ...");
 
-        while (true) {
-            const message_result = await producer.send({
-                topic: topic_name, //"Logs",
-                messages: [{
-                    value: "Bu bir test mesajıdır.",
-                    partition: (Math.floor(Math.random() * 10) % 2 == 0) ? 0 : 1
-                }]
-            })
-            console.log("Gönderim işlemi başarılıdır ..", JSON.stringify(message_result));
-        }
-
+        // sonsuz producer message oluşturmak için
+        // while (true) {
+        //     const message_result = await producer.send({
+        //         topic: topic_name, //"Logs",
+        //         messages: [{
+        //             value: "Bu bir test mesajıdır.",
+        //             partition: (Math.floor(Math.random() * 10) % 2 == 0) ? 0 : 1
+        //         }]
+        //     })
+        //     console.log("Gönderim işlemi başarılıdır ..", JSON.stringify(message_result));
+        // }
+    
         const message_result = await producer.send({
             topic: topic_name, //"Logs",
             messages: [{
