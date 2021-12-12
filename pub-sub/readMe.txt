@@ -9,4 +9,4 @@ bir kere publish edilir multiple okunur pubsub modeli
 
 # node producer.js (Logs || Logs2) (0 || 1) 
 
-# node consumer.js Logs || Logs2 
+# node consumer.js (Logs || Logs2) 

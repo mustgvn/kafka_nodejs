@@ -8,4 +8,4 @@
 
 # node producer.js (Logs || Logs2) (0 || 1) 
 
-# node consumer.js Logs || Logs2 
+# node consumer.js (Logs || Logs2 )

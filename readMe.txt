@@ -7,7 +7,8 @@ docker run --name kafka -p 9092:9092
 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 
 confluentinc/cp-kafka
 
-yukardaki hata verdiğinden yml yaptık
+yukardaki hata verdiğinden confluentinc/cp-kafka 
+bitnami imagelarını kullanarak yml yaptık
 
 
 docker-compose -f docker-compose.yml up -d
