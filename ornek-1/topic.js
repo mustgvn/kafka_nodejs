@@ -20,11 +20,11 @@ async function createTopic() {
         await admin.createTopics({
             topics: [{
                     topic: "Logs",
-                    numPartitions: 1
+                    numPartitions: 1 //tek consumer ile çalışır
                 },
                 {
                     topic: "Logs2",
-                    numPartitions: 2
+                    numPartitions: 2 //çift consumer ile çalışır
                 }
             ]
         });
