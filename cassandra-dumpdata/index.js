@@ -8,7 +8,7 @@ const dummy_data = require("./temp_data_202201111319.json");
 
 createConsumer();
 
- function createConsumer() {
+function createConsumer() {
     try {
         console.log(getCustomers())
     } catch (error) {
@@ -16,27 +16,20 @@ createConsumer();
     }
 
 }
-function getCustomers() {
+async function getCustomers() {
     const agent_tag_names = ['cpuload', 'cpuusage', 'memoryusage', 'diskusage'];
     try {
         let index = 0;
-
-        dummy_data.forEach(item => {
+        for (const item of dummy_data) {
             const query = 'INSERT INTO example_keyspace.tags(created_datetime, agent_id, tag_name, value) VALUES (?,?,?,?)';
-            const params = [Date(item.created_datetime), item.group_id,item.tag_name, item.tag_value];
+            const params = [Date(item.created_datetime), 1, item.tag_name, item.tag_value.toString() ];
 
-            //const query = 'INSERT INTO example_keyspace.metrics(id, assetid, cpuload, cpuusage, diskusage, memusage) VALUES (' + create_UUID() + ', ' + getrandom() + ',' + getrandom() + ',' + getrandom() + ',' + getrandom() + ',' + getrandom() + ');';
-            client.execute(query, params, { prepare: true })
+            await client.execute(query, params, { prepare: true })
                 .then(result => console.log('Row insert on the cluster', result));
 
             index++;
             console.log(index, ' insert edildi.', params.toString())
-     
-        }); 
-
-       
-        
-
+        }
 
         // dummy_data.map(item => {
         //     console.log(item)
@@ -53,20 +46,4 @@ function getCustomers() {
     } catch (error) {
         console.log("Bir hata Oluştu -->", error)
     }
-}
-
-function create_UUID() {
-    var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = (dt + Math.random() * 16) % 16 | 0;
-        dt = Math.floor(dt / 16);
-        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
-}
-function getrandom() {
-    return Math.floor(Math.random() * 10000);
-}
-function getrandom2() {
-    return Math.floor(Math.random() * 4);
 }
